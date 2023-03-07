@@ -4,14 +4,15 @@ import tkinter.messagebox as messagebox
 import shelve
 from datetime import datetime
 PROCESS_RUNNING = True
-searchHistory = shelve.open("ProgramFiles/history")
+searchHistory = shelve.open("history.dat")
 searches = []
 searchNo = -1
 SHOWN_HISTORY = False
 SHOWN_ABOUT = False
 SHOWN_PERSONALIZATION = False
 DARK_THEME = False 
-THEME_WINDOW_BG, THEME_FOREGROUND = open("theme_config.txt").read().split("\n")
+print(open("theme_config.txt").read().replace('\r', '').split("\n"))
+THEME_WINDOW_BG, THEME_FOREGROUND = open("theme_config.txt").read().replace('\r', '').split("\n")
 def browse():
     global frame
     searches.append(text.get())
@@ -124,3 +125,5 @@ def main():
     root.mainloop()
     searchHistory.close()
     PROCESS_RUNNING = False
+
+if __name__ == "__main__": main()
